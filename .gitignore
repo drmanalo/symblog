@@ -1,0 +1,24 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/data/*
+web/uploads/*
+web/bundles/*
+web/cov/*
+
+# Entity backups
+*.php~
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+app/config/parameters_test.yml
+
+# Eclipse settings
+.buildpath
+.project
+.settings/*
