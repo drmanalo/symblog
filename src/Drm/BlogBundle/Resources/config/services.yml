@@ -1,0 +1,7 @@
+parameters:
+#    drm_blog.example.class: Drm\BlogBundle\Example
+
+services:
+#    drm_blog.example:
+#        class: %drm_blog.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

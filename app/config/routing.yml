@@ -1,0 +1,4 @@
+drm_blog:
+    resource: "@DrmBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+

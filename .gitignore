@@ -3,12 +3,13 @@ app/bootstrap*
 
 # Symfony directories
 vendor/*
+bin/*
 */logs/*
 */cache/*
 web/data/*
 web/uploads/*
 web/bundles/*
-web/cov/*
+web/coverage/*
 
 # Entity backups
 *.php~

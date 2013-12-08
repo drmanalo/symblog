@@ -1,0 +1,12 @@
+# src/Drm/BlogBundle/Resources/config/routing.yml
+DrmBlogBundle_homepage:
+    pattern:  /
+    defaults: { _controller: "DrmBlogBundle:Page:index" }
+    requirements:
+        _method:  GET
+        
+DrmBlogBundle_about:
+    pattern:  /about
+    defaults: { _controller: "DrmBlogBundle:Page:about" }
+    requirements:
+        _method:  GET
