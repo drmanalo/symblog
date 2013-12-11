@@ -10,3 +10,9 @@ DrmBlogBundle_about:
     defaults: { _controller: "DrmBlogBundle:Page:about" }
     requirements:
         _method:  GET
+        
+DrmBlogBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: "DrmBlogBundle:Page:contact" }
+    requirements:
+        _method:  GET|POST

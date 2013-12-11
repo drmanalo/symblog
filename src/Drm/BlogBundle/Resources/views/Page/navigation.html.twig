@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block navigation %}
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+		 	<h1 id="site-name" class="brand">
+	  			<a href="/" title="Home" class="brand">drmanalo</a>
+	   		</h1>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="{{ path('DrmBlogBundle_about') }}">About</a></li>
+	       			<li><a href="{{ path('DrmBlogBundle_contact') }}">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}

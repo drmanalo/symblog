@@ -1,0 +1,95 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: #333333;
+	line-height: 1.4em;
+}
+
+a {
+	color: #00AAEF;
+	text-decoration: none;
+}
+
+p {
+	text-align: justify;
+}
+
+blockquote {
+	font-size: 0.9em;
+	font-style: italic;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+pre {
+	background: none repeat scroll 0 0 #EEEEEE;
+	border: 1px solid #DDDDDD;
+	clear: both;
+	font: 0.857em/1.5em 'Source Code Pro', sans-serif;
+	margin-bottom: 1.833em;
+	overflow: auto;
+	padding: 0.667em 0.917em;
+	white-space: pre-wrap;
+}
+
+body > .navbar .brand:hover {
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px
+		rgba(255, 255, 255, 0.4);
+}
+
+body > .navbar .brand {
+	color: #000000;
+	float: left;
+	font-weight: bold;
+	margin-left: 1px;
+	padding: 5px 0;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px
+		rgba(255, 255, 255, 0.125);
+	transition: all 0.2s linear 0s;
+}
+
+#site-name {
+    line-height: 1;
+    margin: 0;
+}
+
+#footer {
+	background: none repeat scroll 0 0 #000000;
+	color: #7E7E7E;
+	font-size: 0.8em;
+	line-height: 1.4em;
+	padding: 20px 0;
+}
+
+#footer h5 {
+	border-bottom: 1px dashed #3B3B3B;
+	color: #CCCCCC;
+}
+
+#footer p {
+	padding-bottom: 10px;
+}
+
+#footer a {
+	color: #FFFFFF;
+}
+
+#footer a:hover {
+	color: #00AEEF;
+	text-decoration: none;
+}
+
+#footer ul {
+	list-style-type: none;
+}
+
+#footer ul li {
+	border-bottom: 1px dashed #3B3B3B;
+	margin-bottom: 6px;
+	padding-bottom: 6px;
+}

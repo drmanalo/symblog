@@ -1,54 +1,56 @@
-<!-- app/Resources/views/base.html.twig -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
-        <title>{% block title %}symblog{% endblock %} - symblog</title>
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        {% block stylesheets %}
-            <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
-            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
-            <link href="{{ asset('bundles/drmblog/css/screen.css') }}" type="text/css" rel="stylesheet" />
-        {% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-
-        <section id="wrapper">
-            <header id="header">
-                <div class="top">
-                    {% block navigation %}
-                        <nav>
-                        	 <ul class="navigation">
-            					<li><a href="{{ path('DrmBlogBundle_homepage') }}">Home</a></li>
-					            <li><a href="{{ path('DrmBlogBundle_about') }}">About</a></li>
-					            <li><a href="#">Contact</a></li>
-					        </ul>
-                        </nav>
-                    {% endblock %}
-                </div>
-                <hgroup>
-				    <h2>{% block blog_title %}<a href="{{ path('DrmBlogBundle_homepage') }}">symblog</a>{% endblock %}</h2>
-				    <h3>{% block blog_tagline %}<a href="{{ path('DrmBlogBundle_homepage') }}">creating a blog in Symfony2</a>{% endblock %}</h3>
-				</hgroup>
-            </header>
-
-            <section class="main-col">
-                {% block body %}{% endblock %}
-            </section>
-            <aside class="sidebar">
-                {% block sidebar %}{% endblock %}
-            </aside>
-
-            <div id="footer">
-                {% block footer %}
-                    Symfony2 blog tutorial - created by <a href="https://github.com/dsyph3r">dsyph3r</a>
-                {% endblock %}
-            </div>
-        </section>
-
-        {% block javascripts %}{% endblock %}
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="apple-mobile-web-app-capable" content="YES" />
+	<title>dhon.manalo | {% block title %}{% endblock %}</title>
+	<style>
+	body {
+		padding-top: 60px;
+		/* 60px to make the container go all the way to the bottom of the topbar */
+	}
+	</style>
+	
+	{% block stylesheets %}
+    	<link href="{{ asset('bundles/drmblog/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+    	<link href="{{ asset('bundles/drmblog/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet" />
+    	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic">
+	{% endblock %}
+	
+	{% block javascripts %}
+		<!--[if lt IE 9]>
+      		<script src="{{ asset('js/html5.js') }}"></script>
+		<![endif]-->
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="{{ asset('bundles/drmblog/js/bootstrap.js') }}"></script>
+	{% endblock %}	
+	<!-- for fav and touch icons -->
+	<link rel="shortcut icon" href="${ resources }ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="${ resources }ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${ resources }ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${ resources }ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="${ resources }ico/apple-touch-icon-57-precomposed.png">
+	<link rel="icon" type="image/x-icon" href="{{ asset('bundles/drmblog/favicon.ico') }}" />
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		{% block navigation %}{% endblock %}
+	</div>
+	<div class="container">
+		<div class="row-fluid">
+			{% block body %}{% endblock %}
+		</div>
+	</div>
+           
+	<footer id="footer">
+		<div class="container">
+			{% block footer %}{% endblock %}
+		</div>
+	</footer>
+    
+</body>
 </html>

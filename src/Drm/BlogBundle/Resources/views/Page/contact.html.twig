@@ -1,0 +1,33 @@
+{% extends 'DrmBlogBundle::layout.html.twig' %}
+
+{% block title %}Contact Me{% endblock%}
+
+{% block body %}
+    <header>
+        <h2>Contact Me</h2>
+    </header>
+    
+    {% for flashMessage in app.session.flashbag.get('blogger-notice') %}
+    	<div class="alert alert-info">
+        	{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	
+    <form action="{{ path('DrmBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    	{%  if (form_errors(form)) %}
+    	<div class="alert alert-important">
+			{{ form_errors(form) }}
+    	</div>
+    	{% endif %}
+
+    	{{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.body) }}
+
+        {{ form_rest(form) }}
+		
+		<br/>
+       	<input type="submit" value="Contact Me" class="btn btn-inverse" />
+    </form>
+{% endblock %}

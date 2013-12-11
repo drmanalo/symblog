@@ -1,6 +1,18 @@
-{# src/Drm/BlogBundle/Resources/views/layout.html.twig #}
 {% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/drmblog/css/dhoman.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block navigation %}
+	 {% render controller("DrmBlogBundle:Page:navigation") %}
+{% endblock %}
 
 {% block sidebar %}
     Sidebar content
+{% endblock %}
+
+{% block footer %}
+	{% render controller("DrmBlogBundle:Page:footer") %}
 {% endblock %}
