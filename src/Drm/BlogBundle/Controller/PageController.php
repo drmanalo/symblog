@@ -6,29 +6,51 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Drm\BlogBundle\Entity\Enquiry;
 use Drm\BlogBundle\Form\EnquiryType;
 
+/**
+ * Page controller
+ */
 class PageController extends Controller
 {
+	/**
+	 * display navigation
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function navigationAction() 
 	{
 		return $this->render('DrmBlogBundle:Page:navigation.html.twig');
 	}
 	
+	/**
+	 * display footer
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function footerAction() 
 	{
 		return $this->render('DrmBlogBundle:Page:footer.html.twig');
 	}
 	
-	
+	/**
+	 * display the index
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function indexAction()
 	{
 		return $this->render('DrmBlogBundle:Page:index.html.twig');
 	}
 
+	/**
+	 * display about page
+	 */
 	public function aboutAction()
 	{
 		return $this->render('DrmBlogBundle:Page:about.html.twig');
 	}
 
+	/**
+	 * display contact page
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function contactAction()
 	{
 		$enquiry = new Enquiry();
