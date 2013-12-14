@@ -2,11 +2,13 @@
 
 namespace Drm\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="blogs")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Drm\BlogBundle\Entity\Repository\BlogRepository")
  */
 class Blog
 {
@@ -43,6 +45,9 @@ class Blog
 	 */
 	protected $tags;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
+	 */
 	protected $comments;
 
 	/**
@@ -54,11 +59,18 @@ class Blog
 	 * @ORM\Column(type="datetime")
 	 */
 	protected $updated;
-	
+
 	public function __construct()
 	{
+		$this->comments = new ArrayCollection();
+		
 		$this->setCreated(new \DateTime());
 		$this->setUpdated(new \DateTime());
+	}
+	
+	public function __toString()
+	{
+		return $this->getTitle();
 	}
 
 	public function getTitle()
@@ -81,9 +93,12 @@ class Blog
 		$this->author = $author;
 	}
 
-	public function getBlog()
+	public function getBlog($length = null)
 	{
-		return $this->blog;
+		if (false === is_null($length) && $length > 0)
+			return substr($this->blog, 0, $length);
+		else
+			return $this->blog;
 	}
 
 	public function setBlog($blog)
@@ -140,7 +155,7 @@ class Blog
 	{
 		$this->updated = $updated;
 	}
-	
+
 	/**
 	 * @ORM\PreUpdate
 	 */
@@ -149,14 +164,36 @@ class Blog
 		$this->setUpdated(new \DateTime());
 	}
 
+	/**
+	 * Get id
+	 *
+	 * @return integer 
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
     /**
-     * Get id
+     * Add comments
      *
-     * @return integer 
+     * @param \Drm\BlogBundle\Entity\Comment $comments
+     * @return Blog
      */
-    public function getId()
+    public function addComment(\Drm\BlogBundle\Entity\Comment $comments)
     {
-        return $this->id;
+        $this->comments[] = $comments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Drm\BlogBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Drm\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
     }
 }

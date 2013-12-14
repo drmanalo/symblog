@@ -16,9 +16,16 @@ DrmBlogBundle_contact:
     requirements:
         _method:  GET|POST
       
-BlogBundle_blog_show:
+DrmBlogBundle_blog_show:
     pattern:  /{id}
     defaults: { _controller: "DrmBlogBundle:Blog:show" }
     requirements:
         _method:  GET
         id: \d+
+        
+DrmBlogBundle_comment_create:
+    pattern:  /comment/{blog_id}
+    defaults: { _controller: "DrmBlogBundle:Comment:create" }
+    requirements:
+        _method:  POST
+        blog_id: \d+

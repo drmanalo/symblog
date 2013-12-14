@@ -36,13 +36,13 @@ pre {
 	white-space: pre-wrap;
 }
 
-body > .navbar .brand:hover {
+body>.navbar .brand:hover {
 	text-decoration: none;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px
 		rgba(255, 255, 255, 0.4);
 }
 
-body > .navbar .brand {
+body>.navbar .brand {
 	color: #000000;
 	float: left;
 	font-weight: bold;
@@ -54,8 +54,8 @@ body > .navbar .brand {
 }
 
 #site-name {
-    line-height: 1;
-    margin: 0;
+	line-height: 1;
+	margin: 0;
 }
 
 #footer {
@@ -92,4 +92,33 @@ body > .navbar .brand {
 	border-bottom: 1px dashed #3B3B3B;
 	margin-bottom: 6px;
 	padding-bottom: 6px;
+}
+
+/** comments **/
+.comments {
+	clear: both;
+}
+
+.comments .odd {
+	background: #eee;
+}
+
+.comments .comment {
+	padding: 20px;
+}
+
+.comments .comment p {
+	margin-bottom: 0;
+}
+
+.comments h3 {
+	background: #eee;
+	padding: 10px;
+	font-size: 20px;
+	margin-bottom: 20px;
+	clear: both;
+}
+
+.comments .previous-comments {
+	margin-bottom: 20px;
 }

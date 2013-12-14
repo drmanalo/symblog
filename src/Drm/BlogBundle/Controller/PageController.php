@@ -35,9 +35,15 @@ class PageController extends Controller
 	 */
 	public function indexAction()
 	{
-		return $this->render('DrmBlogBundle:Page:index.html.twig');
+		$em = $this->getDoctrine()->getManager();
+		
+		$blogs = $em->getRepository('DrmBlogBundle:Blog')->getLatestBlogs();
+	
+		return $this->render('DrmBlogBundle:Page:index.html.twig', 
+				array('blogs' => $blogs)
+		);
 	}
-
+	
 	/**
 	 * display about page
 	 */

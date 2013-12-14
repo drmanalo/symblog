@@ -21,10 +21,17 @@ class BlogController extends Controller
 		$blog = $em->getRepository('DrmBlogBundle:Blog')->find($id);
 		
 		if (!$blog) {
-			throw $this->createNotFoundException('Unable to find blog post');
+			throw $this->createNotFoundException('Unable to find Blog post.');
 		}
 		
-		return $this->render('DrmBlogBundle:Blog:show.html.twig' , array('blog' => $blog));
+		$comments = $em->getRepository('DrmBlogBundle:Comment')
+						->getCommentsForBlog($blog->getId());
+		
+		return $this->render('DrmBlogBundle:Blog:show.html.twig', array(
+				'blog'      => $blog,
+				'comments'  => $comments
+		));
+		
 	}
 	
 }
