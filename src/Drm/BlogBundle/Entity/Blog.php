@@ -1,6 +1,7 @@
 <?php
 
 namespace Drm\BlogBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -8,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="blogs")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Drm\BlogBundle\Entity\Repository\BlogRepository")
+ * @ORM\Entity(repositoryClass="Drm\BlogBundle\Repository\BlogRepository")
  */
 class Blog
 {
@@ -26,7 +27,7 @@ class Blog
 	protected $title;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $author;
 
@@ -36,14 +37,19 @@ class Blog
 	protected $blog;
 
 	/**
-	 * @ORM\Column(type="string", length=20)
+	 * @ORM\Column(type="string", length=20, nullable=true)
 	 */
 	protected $image;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	protected $tags;
+
+	/**
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	protected $slug;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
@@ -62,15 +68,15 @@ class Blog
 
 	public function __construct()
 	{
-		$this->comments = new ArrayCollection();
+		$this->comments = new ArrayCollection ();
 		
-		$this->setCreated(new \DateTime());
-		$this->setUpdated(new \DateTime());
+		$this->setCreated ( new \DateTime () );
+		$this->setUpdated ( new \DateTime () );
 	}
-	
+
 	public function __toString()
 	{
-		return $this->getTitle();
+		return $this->getTitle ();
 	}
 
 	public function getTitle()
@@ -81,6 +87,7 @@ class Blog
 	public function setTitle($title)
 	{
 		$this->title = $title;
+		$this->setSlug ( $this->title );
 	}
 
 	public function getAuthor()
@@ -95,8 +102,8 @@ class Blog
 
 	public function getBlog($length = null)
 	{
-		if (false === is_null($length) && $length > 0)
-			return substr($this->blog, 0, $length);
+		if (false === is_null ( $length ) && $length > 0)
+			return substr ( $this->blog, 0, $length );
 		else
 			return $this->blog;
 	}
@@ -161,39 +168,86 @@ class Blog
 	 */
 	public function setUpdatedValue()
 	{
-		$this->setUpdated(new \DateTime());
+		$this->setUpdated ( new \DateTime () );
 	}
 
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId()
 	{
 		return $this->id;
 	}
 
-    /**
-     * Add comments
-     *
-     * @param \Drm\BlogBundle\Entity\Comment $comments
-     * @return Blog
-     */
-    public function addComment(\Drm\BlogBundle\Entity\Comment $comments)
-    {
-        $this->comments[] = $comments;
-    
-        return $this;
-    }
+	/**
+	 * Add comments
+	 *
+	 * @param \Drm\BlogBundle\Entity\Comment $comments        	
+	 * @return Blog
+	 */
+	public function addComment(\Drm\BlogBundle\Entity\Comment $comments)
+	{
+		$this->comments [] = $comments;
+		
+		return $this;
+	}
 
-    /**
-     * Remove comments
-     *
-     * @param \Drm\BlogBundle\Entity\Comment $comments
-     */
-    public function removeComment(\Drm\BlogBundle\Entity\Comment $comments)
-    {
-        $this->comments->removeElement($comments);
-    }
+	/**
+	 * Remove comments
+	 *
+	 * @param \Drm\BlogBundle\Entity\Comment $comments        	
+	 */
+	public function removeComment(\Drm\BlogBundle\Entity\Comment $comments)
+	{
+		$this->comments->removeElement ( $comments );
+	}
+
+	/**
+	 * Set slug
+	 *
+	 * @param string $slug        	
+	 * @return Blog
+	 */
+	public function setSlug($slug)
+	{
+		$this->slug = $this->slugify ( $slug );
+	}
+
+	/**
+	 * Get slug
+	 *
+	 * @return string
+	 */
+	public function getSlug()
+	{
+		return $this->slug;
+	}
+
+	public function slugify($text)
+	{
+		// replace non letter or digits by -
+		$text = preg_replace ( '#[^\\pL\d]+#u', '-', $text );
+		
+		// trim
+		$text = trim ( $text, '-' );
+		
+		// transliterate
+		if (function_exists ( 'iconv' )) {
+			$text = iconv ( 'utf-8', 'us-ascii//TRANSLIT', $text );
+		}
+		
+		// lowercase
+		$text = strtolower ( $text );
+		
+		// remove unwanted characters
+		$text = preg_replace ( '#[^-\w]+#', '', $text );
+		
+		if (empty ( $text )) {
+			return 'n-a';
+		}
+		
+		return $text;
+	}
 }

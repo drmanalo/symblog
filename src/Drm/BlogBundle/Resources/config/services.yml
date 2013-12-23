@@ -5,3 +5,8 @@ services:
 #    drm_blog.example:
 #        class: %drm_blog.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    drm_blog.twig.extension:
+        class: Drm\BlogBundle\Twig\Extensions\DrmBlogExtension
+        tags:
+            - { name: twig.extension }

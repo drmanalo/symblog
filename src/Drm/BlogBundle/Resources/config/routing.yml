@@ -15,9 +15,9 @@ DrmBlogBundle_contact:
     defaults: { _controller: "DrmBlogBundle:Page:contact" }
     requirements:
         _method:  GET|POST
-      
+       
 DrmBlogBundle_blog_show:
-    pattern:  /{id}
+    pattern:  /{id}/{slug}
     defaults: { _controller: "DrmBlogBundle:Blog:show" }
     requirements:
         _method:  GET

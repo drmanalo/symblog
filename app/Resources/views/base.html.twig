@@ -42,10 +42,15 @@
 	</div>
 	<div class="container">
 		<div class="row-fluid">
-			{% block body %}{% endblock %}
+			<div class="span8">
+				{% block body %}{% endblock %}
+			</div>
+			<div class="span3 offset1 sidebar">
+				{% block sidebar %}{% endblock %}
+			</div>
 		</div>
+		<div class="clearfix"></div>
 	</div>
-           
 	<footer id="footer">
 		<div class="container">
 			{% block footer %}{% endblock %}

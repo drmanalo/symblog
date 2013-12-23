@@ -1,3 +1,7 @@
 parameters:
     # Blogger contact email address
     drm_blog.emails.contact_email: drmanalo@hotmail.co.uk
+    
+    # Blogger max latest comments
+    drm_blog.comments.latest_comment_limit: 10
+    
