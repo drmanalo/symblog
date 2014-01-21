@@ -19,7 +19,7 @@ class BlogControllerTest extends WebTestCase
 	public function testShowAction_Exists()
 	{
 		$client = static::createClient ();
-		$client->request ( 'GET', '/6/a-day-with-symfony2' );
+		$client->request ( 'GET', '/1/a-day-with-symfony2' );
 		
 		$crawler = $client->getCrawler ();
 		$expected = $crawler->filter ( 'h2:contains("A day with Symfony2")' )

@@ -29,3 +29,9 @@ DrmBlogBundle_comment_create:
     requirements:
         _method:  POST
         blog_id: \d+
+        
+DrmBlogBundle_blog_add:
+    pattern:  /blog/add/
+    defaults: { _controller: "DrmBlogBundle:Blog:add" }
+    requirement:
+      _method:  GET|POST
