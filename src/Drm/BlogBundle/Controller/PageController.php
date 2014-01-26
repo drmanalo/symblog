@@ -97,7 +97,7 @@ class PageController extends Controller
 		}
 		
 		return $this->render ( 'DrmBlogBundle:Page:contact.html.twig', array (
-				'form' => $form->createView () 
+				'contact_form' => $form->createView () 
 		) );
 	}
 

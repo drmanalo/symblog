@@ -27,6 +27,14 @@
 		<![endif]-->
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="{{ asset('bundles/drmblog/js/bootstrap.js') }}"></script>
+		<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+		<script>
+        	tinymce.init({
+            	selector: "textarea",
+            	plugins: "code",
+            	entity_encoding: "raw"
+            });
+		</script>
 	{% endblock %}	
 	<!-- for fav and touch icons -->
 	<link rel="shortcut icon" href="${ resources }ico/favicon.ico">
@@ -42,12 +50,7 @@
 	</div>
 	<div class="container">
 		<div class="row-fluid">
-			<div class="span8">
-				{% block body %}{% endblock %}
-			</div>
-			<div class="span3 offset1 sidebar">
-				{% block sidebar %}{% endblock %}
-			</div>
+			{% block body %}{% endblock %}
 		</div>
 		<div class="clearfix"></div>
 	</div>

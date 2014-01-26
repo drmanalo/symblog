@@ -3,31 +3,34 @@
 {% block title %}Contact Me{% endblock%}
 
 {% block body %}
-    <header>
-        <h2>Contact Me</h2>
-    </header>
-    
-    {% for flashMessage in app.session.flashbag.get('blogger-notice') %}
-    	<div class="alert alert-info">
-        	{{ flashMessage }}
-    	</div>
-	{% endfor %}
-	
-    <form action="{{ path('DrmBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-    	{%  if (form_errors(form)) %}
-    	<div class="alert alert-important">
-			{{ form_errors(form) }}
-    	</div>
-    	{% endif %}
-
-    	{{ form_row(form.name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.body) }}
-
-        {{ form_rest(form) }}
+	<div class="span8">
+	    <header>
+	        <h2>Contact Me</h2>
+	    </header>
+	    
+	    {% for flashMessage in app.session.flashbag.get('blogger-notice') %}
+	    	<div class="alert alert-info">
+	        	{{ flashMessage }}
+	    	</div>
+		{% endfor %}
 		
-		<br/>
-       	<input type="submit" value="Contact Me" class="btn btn-inverse" />
-    </form>
+	   {{ form_start(contact_form) }}
+    		{{ form_errors(contact_form) }}
+	
+	    	{{ form_row(contact_form.name) }}
+	        {{ form_row(contact_form.email) }}
+	        {{ form_row(contact_form.subject, { 'attr' : {'class' : 'span8'}} ) }}
+	        {{ form_row(contact_form.body, { 'attr' : {'class' : 'span8'}} ) }}
+	
+	        {{ form_rest(contact_form) }}
+			<div class="controls">
+	       		<input type="submit" value="Contact Me" class="btn btn-inverse" />
+	       	</div>
+	    {{ form_end(contact_form) }}
+    </div>
+    <div class="span3 offset1 sidebar">
+		{% block sidebar %}
+		{% render controller("DrmBlogBundle:Page:sidebar") %}
+		{% endblock %}
+	</div>
 {% endblock %}

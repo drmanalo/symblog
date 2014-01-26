@@ -8,10 +8,7 @@
             <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
             <h2>{{ blog.title }}</h2>
         </header>
-        <img src="{{ asset(['bundles/drmblog/img/', blog.image]|join) }}" alt="{{ blog.title }} image not found" class="large" />
-        <div>
-            <p>{{ blog.blog }}</p>
-        </div>
+        <div>{{ blog.blog|raw }}</div>
     </article>
     <section class="comments" id="comments">
         <section class="previous-comments">

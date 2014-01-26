@@ -1,3 +1,7 @@
+DrmBlogBundle_blog:
+        resource: "@DrmBlogBundle/Resources/config/routing/blog.yml"
+        prefix:   /blog
+
 DrmBlogBundle_homepage:
     pattern:  /
     defaults: { _controller: "DrmBlogBundle:Page:index" }
@@ -30,8 +34,3 @@ DrmBlogBundle_comment_create:
         _method:  POST
         blog_id: \d+
         
-DrmBlogBundle_blog_add:
-    pattern:  /blog/add/
-    defaults: { _controller: "DrmBlogBundle:Blog:add" }
-    requirement:
-      _method:  GET|POST

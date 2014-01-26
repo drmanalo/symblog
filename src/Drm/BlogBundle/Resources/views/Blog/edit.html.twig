@@ -1,0 +1,24 @@
+{% extends 'DrmBlogBundle::layout.html.twig' %}
+
+{% block title %}Edit Blog{% endblock %}
+
+{% block body %}
+
+	<h3>Edit Blog 
+    	<a href="{{ path('blog') }}" class="btn btn-primary pull-right">Back to the list</a>
+    </h3>
+
+ 	{{ form_start(edit_form) }}
+    		{{ form_errors(edit_form) }}
+	
+	    	{{ form_row(edit_form.title, { 'attr': {'class' : 'span5'}} ) }}
+	        {{ form_row(edit_form.tags, { 'attr' : {'class' : 'span5'}} ) }}
+	    	{{ form_row(edit_form.author) }}
+	        {{ form_row(edit_form.blog) }}
+	        {{ form_row(edit_form.image) }}
+	        
+	
+	        {{ form_rest(edit_form) }}
+	{{ form_end(edit_form) }}
+	        
+{% endblock %}

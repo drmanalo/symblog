@@ -1,0 +1,30 @@
+blog:
+    pattern:  /
+    defaults: { _controller: "DrmBlogBundle:Blog:index" }
+
+blog_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DrmBlogBundle:Blog:show" }
+
+blog_new:
+    pattern:  /new
+    defaults: { _controller: "DrmBlogBundle:Blog:new" }
+
+blog_create:
+    pattern:  /create
+    defaults: { _controller: "DrmBlogBundle:Blog:create" }
+    requirements: { _method: post }
+
+blog_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DrmBlogBundle:Blog:edit" }
+
+blog_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DrmBlogBundle:Blog:update" }
+    requirements: { _method: post|put }
+
+blog_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DrmBlogBundle:Blog:delete" }
+    requirements: { _method: get|delete }

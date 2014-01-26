@@ -16,7 +16,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('user')
-            ->add('comment')
+            ->add('comment', 'textarea', array( 'required' => false));
         ;
     }
     

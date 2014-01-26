@@ -3,20 +3,27 @@
 {% block title %}About This Site{% endblock%}
 
 {% block body %}
-    <header>
-        <h2>About This Site</h2>
-    </header>
-    <article>
-        <p>This will contain journal of my IT challenges. Though I will not blog daily (maybe not even weekly), when I found something useful and worth taking down notes, I will surely blog about it. Most write ups are "works in my situation" type of thing so it is worth checking version numbers before trying out.</p>
-    </article>
-    <h3>Disclaimer</h3>
-	<p>Whilst every effort has been made to ensure the accuracy of the information supplied herein, this site cannot be held responsible for any errors or omissions. Unless otherwise indicated, opinions expressed herein are those of the author of the blog.</p>
-	<p>I'm going to quote here one of my favourites blogger disclaimer. You should find this on <a href="http://ledux.blogspot.com/2005/03/herches-blog-disclaimer.html" target="_blank">Herche's blog</a>.</p>
-	<blockquote>
-		<p>Heretofore and unto now, this blogger hosted weblog has had to rely exclusively on the blanket disclaimer provided for the corporate body of blog*spot addresses. While this kind of disclaimer is usually sufficient to protect a blogger from liability, it falls short when dealing with inherently offensive content, websites with a mind of their own and authors who are excessively paranoid about being dragged into court. With the above firmly borne in mind, we propose the following weblog disclaimer:</p>
-		<p><br />...The views expressed by the authors on this website do not necessarily reflect the views of this website, those who link to this website, the author’s mother, father, sister, brother, uncle, aunt, grandparents, cousins, step relations, any other blood relative and the author himself, this website’s web host…</p>
-		<p><br />Comments on this website are the sole responsibility of their writers and the writer will take full responsibility, liability, and blame for any libel or litigation that results from something written in or as a direct result of something written in a comment. The accuracy, completeness, veracity, honesty, exactitude, factuality and politeness of comments are not guaranteed.</p>
-		<p><br />...Although it may claim otherwise, this website does not offer legal, medical, psychiatric, veterinary, gynecological, archaeological, astronomical, astrological, ontological, paleontological, philosophical, axiological, audiological, bacteriological, mineralogical, criminological, terminological, dermatological, ecclesiastical, campanological, phrenological, phonological, technological, hematological, campanological…</p>
-		<p><br />...This website may inadvertently link to content that is obscene, prurient, useless, hate-filled, poisonous, pornographic, frivolous, empty, rotten, bad, disgusting, hostile, repulsive, virulent, infectious…This website in no way condones, endorses or takes responsibility for such content.</p>
-	</blockquote>
+	<div class="span8">
+	    <header>
+	        <h2>About This Site</h2>
+	    </header>
+	    <article>
+	        <p>This will contain journal of my IT challenges. Though I will not blog daily (maybe not even weekly), when I found something useful and worth taking down notes, I will surely blog about it. Most write ups are "works in my situation" type of thing so it is worth checking version numbers before trying out.</p>
+	    </article>
+	    <h3>Disclaimer</h3>
+		<p>Whilst every effort has been made to ensure the accuracy of the information supplied herein, this site cannot be held responsible for any errors or omissions. Unless otherwise indicated, opinions expressed herein are those of the author of the blog.</p>
+		<p>I'm going to quote here one of my favourites blogger disclaimer. You should find this on <a href="http://ledux.blogspot.com/2005/03/herches-blog-disclaimer.html" target="_blank">Herche's blog</a>.</p>
+		<blockquote>
+			<p>Heretofore and unto now, this blogger hosted weblog has had to rely exclusively on the blanket disclaimer provided for the corporate body of blog*spot addresses. While this kind of disclaimer is usually sufficient to protect a blogger from liability, it falls short when dealing with inherently offensive content, websites with a mind of their own and authors who are excessively paranoid about being dragged into court. With the above firmly borne in mind, we propose the following weblog disclaimer:</p>
+			<p><br />...The views expressed by the authors on this website do not necessarily reflect the views of this website, those who link to this website, the author’s mother, father, sister, brother, uncle, aunt, grandparents, cousins, step relations, any other blood relative and the author himself, this website’s web host…</p>
+			<p><br />Comments on this website are the sole responsibility of their writers and the writer will take full responsibility, liability, and blame for any libel or litigation that results from something written in or as a direct result of something written in a comment. The accuracy, completeness, veracity, honesty, exactitude, factuality and politeness of comments are not guaranteed.</p>
+			<p><br />...Although it may claim otherwise, this website does not offer legal, medical, psychiatric, veterinary, gynecological, archaeological, astronomical, astrological, ontological, paleontological, philosophical, axiological, audiological, bacteriological, mineralogical, criminological, terminological, dermatological, ecclesiastical, campanological, phrenological, phonological, technological, hematological, campanological…</p>
+			<p><br />...This website may inadvertently link to content that is obscene, prurient, useless, hate-filled, poisonous, pornographic, frivolous, empty, rotten, bad, disgusting, hostile, repulsive, virulent, infectious…This website in no way condones, endorses or takes responsibility for such content.</p>
+		</blockquote>
+	</div>
+	<div class="span3 offset1 sidebar">
+		{% block sidebar %}
+		{% render controller("DrmBlogBundle:Page:sidebar") %}
+		{% endblock %}
+	</div>
 {% endblock %}
