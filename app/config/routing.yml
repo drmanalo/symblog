@@ -1,4 +1,10 @@
 drm_blog:
     resource: "@DrmBlogBundle/Resources/config/routing.yml"
     prefix:   /
-
+login:
+    path: /login
+    defaults: { _controller: "DrmBlogBundle:Login:login" }
+login_check:
+    path: /login_check
+logout:
+    path: /logout
