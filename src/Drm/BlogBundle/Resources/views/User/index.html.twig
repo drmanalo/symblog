@@ -1,0 +1,32 @@
+{% extends 'DrmBlogBundle::layout.html.twig' %} {% block body -%}
+<h3>
+	User list<a href="{{ path('user_new') }}"
+		class="btn btn-primary pull-right"> Add User</a>
+</h3>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for entity in entities %}
+		<tr>
+			<td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{
+					entity.id }}</a></td>
+			<td>{{ entity.username }}</td>
+			<td>{{ entity.email }}</td>
+			<td><a href="{{ path('user_show', { 'id': entity.id }) }}"
+				class="btn btn-small btn-primary">show</a> <a
+				href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small btn-primary">edit</a>
+				</ul></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

@@ -2,6 +2,10 @@ DrmBlogBundle_blog:
         resource: "@DrmBlogBundle/Resources/config/routing/blog.yml"
         prefix:   /blog
 
+DrmBlogBundle_user:
+        resource: "@DrmBlogBundle/Resources/config/routing/user.yml"
+        prefix:   /user
+
 DrmBlogBundle_homepage:
     pattern:  /
     defaults: { _controller: "DrmBlogBundle:Page:index" }
