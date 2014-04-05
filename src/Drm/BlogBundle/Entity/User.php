@@ -3,6 +3,7 @@
 namespace Drm\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
@@ -43,10 +44,17 @@ class User implements UserInterface, \Serializable
 	private $isActive;
 	
 	private $salt = 'Tee8ahcohTooKio5DaiS';
+	
+	/**
+	 * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+	 *
+	 */
+	private $roles;
 
 	public function __construct()
 	{
 		$this->isActive = true;
+		$this->roles = new ArrayCollection();
 	}
 
 	/**
@@ -78,9 +86,7 @@ class User implements UserInterface, \Serializable
 	 */
 	public function getRoles()
 	{
-		return array (
-				'ROLE_USER' 
-		);
+	    return $this->roles->toArray();
 	}
 
 	/**
@@ -195,4 +201,28 @@ class User implements UserInterface, \Serializable
 	{
 		return $this->isActive;
 	}
+	
+
+    /**
+     * Add roles
+     *
+     * @param \Drm\BlogBundle\Entity\Role $roles
+     * @return User
+     */
+    public function addRole(\Drm\BlogBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+    
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Drm\BlogBundle\Entity\Role $roles
+     */
+    public function removeRole(\Drm\BlogBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
 }
