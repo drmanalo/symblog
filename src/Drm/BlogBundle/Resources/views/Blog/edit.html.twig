@@ -1,24 +1,17 @@
 {% extends 'DrmBlogBundle::layout.html.twig' %}
 
-{% block title %}Edit Blog{% endblock %}
+{% block title %}Edit/Delete Blog{% endblock %}
 
 {% block body %}
 
-	<h3>Edit Blog 
+	<h3>Edit or Delete Blog 
     	<a href="{{ path('blog') }}" class="btn btn-primary pull-right">Back to the list</a>
     </h3>
 
- 	{{ form_start(edit_form) }}
-    		{{ form_errors(edit_form) }}
+    {{ form(edit_form) }} 	
+
+	<div style="margin-top: -46px; margin-left: 70px;">
+	   {{ form(delete_form) }}
+    </div>
 	
-	    	{{ form_row(edit_form.title, { 'attr': {'class' : 'span5'}} ) }}
-	        {{ form_row(edit_form.tags, { 'attr' : {'class' : 'span5'}} ) }}
-	    	{{ form_row(edit_form.author) }}
-	        {{ form_row(edit_form.blog) }}
-	        {{ form_row(edit_form.image) }}
-	        
-	
-	        {{ form_rest(edit_form) }}
-	{{ form_end(edit_form) }}
-	        
 {% endblock %}

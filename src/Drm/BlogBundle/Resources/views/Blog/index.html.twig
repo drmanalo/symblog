@@ -24,8 +24,7 @@
                 <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d') }}{% endif %}</td>
                 <td>
                 	<a href="{{ path('blog_show', { 'id': entity.id }) }}" class="btn btn-small btn-primary">show</a>
-                    <a href="{{ path('blog_edit', { 'id': entity.id }) }}" class="btn btn-small btn-primary">edit</a>
-                    <a href="{{ path('blog_delete', { 'id': entity.id }) }}" class="btn btn-small btn-danger" onclick="return confirm('Are you sure?');">delete</a>
+                    <a href="{{ path('blog_edit', { 'id': entity.id }) }}" class="btn btn-small btn-primary">edit/delete</a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,9 +1,16 @@
-{% extends 'DrmBlogBundle::layout.html.twig' %} {% block body %}
+{% extends 'DrmBlogBundle::layout.html.twig' %} 
+
+{% block body %}
 
 <h3>
-	User edit<a href="{{ path('user') }}" class="btn btn-primary pull-right"> Back to the list </a>
+	Edit or Delete User<a href="{{ path('user') }}"
+		class="btn btn-primary pull-right"> Back to the list </a>
 </h3>
 
 {{ form(edit_form) }}
+
+<div style="margin-top: -46px; margin-left: 70px;">
+    {{ form(delete_form) }}
+</div>
 
 {% endblock %}

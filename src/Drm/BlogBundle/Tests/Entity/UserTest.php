@@ -13,11 +13,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
 		$user = new User ();
 		
 		$encoder = new MessageDigestPasswordEncoder ( 'sha512', false, 10 );
-		$password = $encoder->encodePassword ( 'admin', $user->getSalt () );
+		$password = $encoder->encodePassword ( '123123', $user->getSalt () );
 		$user->setPassword ( $password );
 		
-		$expected = 'cee5aef03a8671b4acdc0403c090d311317eca393b894f9b42c2d8ce0ebe2ff93721af725be2a085087c5e288beb5ddd706bb716132f0a0cfb5edcfeb161ab8f';
+		$actual = '653c2252276ca438d89eca2e62c70441cd738d7b17f2f679c5aa91228f851c5cb5c254c6235a0d17006244760354557e545e5b972f78a2df1bed011bc491f447';
 		
-		$this->assertEquals ( $expected, $user->getPassword () );
+		$this->assertEquals ( $actual, $user->getPassword () );
 	}
 }

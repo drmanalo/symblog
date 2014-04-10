@@ -2,54 +2,71 @@
 
 namespace Drm\BlogBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class BlogControllerTest extends WebTestCase
 {
-    /*
+    
+    private $client;
+    
+    public function setUp() {
+        
+        $classes = array(
+                // classes should implement Doctrine\Common\DataFixtures\FixtureInterface
+                'Drm\BlogBundle\DataFixtures\ORM\UserFixtures',
+                'Drm\BlogBundle\DataFixtures\ORM\BlogFixtures'
+        );
+        
+        $this->loadFixtures($classes);
+        
+        $this->client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => '12341234',
+        ));
+        
+    }
+    
     public function testCompleteScenario()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
+        $crawler = $this->client->request('GET', '/blog/');
+        
+        // assert that user has been authenticated
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        
+        // create new blog
+        $link = $this->client->click($crawler->selectLink('Create New Blog')->link());
+        
+        // fill up required fields
+        $form = $link->selectButton('Create')->form(array(
+                'drm_blogbundle_blog[title]' => 'Test',
+                'drm_blogbundle_blog[author]' => 'lekat',
+                'drm_blogbundle_blog[tags]' => 'test',
+                'drm_blogbundle_blog[blog]' => 'sample content',
+        ));
+        
+        $this->client->submit($form);
+        $redirect = $this->client->followRedirect();
+        
+        $this->assertEquals(1, $redirect->filter('h2:contains("Test")')->count());
 
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/blog/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /blog/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        // edit the blog
+        $link = $this->client->click($crawler->selectLink('edit/delete')->link());
 
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'drm_blogbundle_blogtype[field_name]'  => 'Test',
-            // ... other fields to fill
+        $form = $link->selectButton('Update')->form(array(
+            'drm_blogbundle_blog[title]' => 'Edited',
         ));
 
-        $client->submit($form);
-        $crawler = $client->followRedirect();
+        $this->client->submit($form);
+        $redirect = $this->client->followRedirect();
 
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
+        $this->assertEquals(1, $redirect->filter('[value="Edited"]')->count());
 
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
+        // delete the blog
+        $this->client->submit($link->selectButton('Delete')->form());
+        $redirect = $this->client->followRedirect();
 
-        $form = $crawler->selectButton('Edit')->form(array(
-            'drm_blogbundle_blogtype[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        $this->assertNotRegExp('/Edited/', $this->client->getResponse()->getContent());
+        
     }
 
-    */
 }
