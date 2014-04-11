@@ -1,19 +1,25 @@
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %}
+{% extends 'DrmBlogBundle::layout.html.twig' %} 
 
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+{% block title %}Admin Login{% endblock %} 
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+{% block body %} 
 
-    {#
-        If you want to control the URL the user
-        is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-
-    <button type="submit">login</button>
+<form class="form-signin" action="{{ path('login_check') }}" method="post">
+    <h2 class="form-signin-heading">Admin Login</h2>
+    {% if error %}
+        <div class="alert alert-error">{{ error.message }}</div>
+    {% endif %}
+	<input type="text" class="input-block-level"
+		placeholder="Username" name="_username"
+		value="{{ last_username }}"> 
+	<input type="password" class="input-block-level" 
+	   placeholder="Password" name="_password"> 
+	{#
+	   If you want to control the URL the user is redirected to on success 
+	   (more details below) 
+	   <input type="hidden" name="_target_path"	value="/account" />
+	#}
+	<button class="btn btn-primary" type="submit">Login</button>
 </form>
+
+{% endblock %}

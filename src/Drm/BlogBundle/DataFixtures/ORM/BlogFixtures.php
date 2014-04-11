@@ -17,7 +17,7 @@ class BlogFixtures implements FixtureInterface
 		$blog->setTitle('Test Title');
         $blog->setBlog('Test Content');
 		$blog->setAuthor('linus');
-		$blog->setTags('linux');
+		$blog->setTags('linux','php','code','code','symblog','blog');
 		$blog->setCreated(new \DateTime("2012-07-23 21:21:46"));
 		$blog->setUpdated($blog->getCreated());
 
