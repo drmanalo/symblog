@@ -6,17 +6,6 @@
     	<a href="{{ path('blog') }}" class="btn btn-primary pull-right">Back to the list</a>
     </h3>
 
-	{{ form_start(form) }}
-    		{{ form_errors(form) }}
-	
-	    	{{ form_row(form.title, { 'attr': {'class' : 'span5'}} ) }}
-	        {{ form_row(form.tags, { 'attr' : {'class' : 'span5'}} ) }}
-	    	{{ form_row(form.author) }}
-	        {{ form_row(form.blog) }}
-	        {{ form_row(form.image) }}
-	        
-	
-	        {{ form_rest(form) }}
-	{{ form_end(form) }}
+	{{ form(form) }}
 
 {% endblock %}
