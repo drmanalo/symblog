@@ -10,7 +10,7 @@ class PageControllerTest extends WebTestCase
 	public function testIndex()
 	{
 		$client = static::createClient ();
-		$crawler = $client->request ( 'GET', '/' );
+		$crawler = $client->request ( 'GET', '/blogs/all/1' );
 		
 		$this->assertTrue ( $crawler->filter ( 'article.blog' )
 			->count () > 0 );

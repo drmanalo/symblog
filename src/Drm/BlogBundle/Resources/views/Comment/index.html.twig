@@ -1,10 +1,11 @@
-{% for comment in comments %}
-    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
-        <header>
-            <p><span class="highlight">{{ comment.user }}</span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|created_ago }}</time></p>
-        </header>
-        <p>{{ comment.comment|raw }}</p>
-    </article>
-{% else %}
-    <p>Commenting feature has been turned off.</p>
-{% endfor %}
+{% if comments %}
+    <h3>Comments</h3>
+	{% for comment in comments %}
+	    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+	        <header>
+	            <p><span class="highlight">{{ comment.user }}</span> commented {{ comment.created|created_ago }}</p>
+	        </header>
+	        <p>{{ comment.comment|raw }}</p>
+	    </article>
+	{% endfor %}
+{% endif %}

@@ -22,10 +22,13 @@ class UrlAccessTest extends WebTestCase
     public function testAccessAllowedForUnathorizedUsers()
     {
         $this->loadFixtures(array('Drm\BlogBundle\DataFixtures\ORM\BlogFixtures'));
-        $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_homepage'));
+        // homepage is a redirect
+        $this->_testReturnCode(302, $this->getUrl('DrmBlogBundle_homepage'));
+        $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_blogs'));
         $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_contact'));
         $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_about'));
-        $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_blog_show', array('id' => 1, 'slug' => 'test-title')));
+        $this->_testReturnCode(200, $this->getUrl('DrmBlogBundle_blog_show', 
+                array('id' => 1, 'slug' => 'test-title')));
     }
     
     /**

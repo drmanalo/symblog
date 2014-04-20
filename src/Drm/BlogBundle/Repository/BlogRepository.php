@@ -13,19 +13,43 @@ use Doctrine\ORM\EntityRepository;
 class BlogRepository extends EntityRepository
 {
 
-	public function getLatestBlogs($limit = null)
+	public function getLatestBlogs($tag = 'all', $limit = null, $offset = null)
 	{
-		$qb = $this->createQueryBuilder ( 'b' )
-			->select ( 'b, c' )
-			->leftJoin ( 'b.comments', 'c' )
-			->addOrderBy ( 'b.created', 'DESC' );
+		$qb = $this->createQueryBuilder ('b')
+			->select ('b, c')
+			->leftJoin ('b.comments', 'c')
+			->addOrderBy ('b.created', 'DESC');
 		
-		if (false === is_null ( $limit )) {
-			$qb->setMaxResults ( $limit );
+		if ($limit) {
+			$qb->setMaxResults($limit);
 		}
 		
-		return $qb->getQuery ()
-			->getResult ();
+		if($offset)	{
+		    $qb->setFirstResult($offset);
+		}
+		
+		if($tag != 'all') {
+		    $qb->andWhere('b.tags = :tag')
+		       ->setParameter('tags', $tag);
+		}
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getTotalNumberOfBlogs($tag = 'all') {
+	    
+	   $qb = $this->createQueryBuilder('b')
+	       ->select('count(b.id)');    
+
+	   if($tag != 'all') {
+	       $qb->andWhere('b.tags = :tag')
+	       ->setParameter('tags', $tag);
+	   }
+	   
+	   $query = $qb->getQuery();
+	   
+	   return $query->getSingleScalarResult();
+	   
 	}
 
 	public function getTags()

@@ -1,15 +1,16 @@
 {% extends 'DrmBlogBundle::layout.html.twig' %}
 
+{% block title %} Blogs Index {% endblock %}
+
 {% block body %}
 	<div class="span8">
 	{% for blog in blogs %}
         <article class="blog">
-            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <div class="date">{{ blog.created|created_ago }}</div>
             <header>
                 <h2><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></h2>
             </header>
 
-            <img src="{{ asset(['images/', blog.image]|join) }}" />
             <div class="snippet">
                 <p>{{ blog.blog(500)|raw }}</p>
                 <p class="continue"><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">Continue reading...</a></p>
@@ -17,7 +18,7 @@
 
             <footer class="meta">
 			    <p>Comments: <a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug}) }}#comments">{{ blog.comments|length }}</a></p>
-			    <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created|date('h:iA') }}</p>
+			    <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created|date('h:i:A') }}</p>
 			    <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
 			</footer>
             
@@ -26,9 +27,24 @@
         <p>There are no blog entries for symblog</p>
     {% endfor %}
     </div>
-    <div class="span3 offset1 sidebar">
+    <div class="span3 sidebar">
 		{% block sidebar %}
 		{% render controller("DrmBlogBundle:Page:sidebar") %}
 		{% endblock %}
 	</div>
+	<div class="clearfix"></div>
+	{% if last_page > 1 %}
+        <div class="pagination pagination-centered">
+            <ul>
+            {% for page in 1..last_page %}
+                {% if page == current_page %}
+                    <li class="active"><a href="#">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('DrmBlogBundle_blogs', { 'tag': "all", 'page': page }) }}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+	            <li><a href="{{ path('DrmBlogBundle_blogs', { 'tag': "all", 'page': next_page }) }}">next</a></li>
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}

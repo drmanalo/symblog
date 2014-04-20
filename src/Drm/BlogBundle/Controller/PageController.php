@@ -32,22 +32,44 @@ class PageController extends Controller
 		return $this->render ( 'DrmBlogBundle:Page:footer.html.twig' );
 	}
 
+	public function indexAction() {
+	    
+	   return $this->redirect(
+	           $this->generateUrl('DrmBlogBundle_blogs', array('tag' => 'all', 'page' => 1)
+	   ));   
+	}
+	
+	
 	/**
 	 * display the index
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function indexAction()
+	public function blogsAction($tag, $page)
 	{
-		$em = $this->getDoctrine ()
-			->getManager ();
+		$em = $this->getDoctrine()->getManager();
 		
-		$blogs = $em->getRepository ( 'DrmBlogBundle:Blog' )
-			->getLatestBlogs ();
+		$total_posts = $em->getRepository('DrmBlogBundle:Blog')
+		                      ->getTotalNumberOfBlogs($tag);
 		
-		return $this->render ( 'DrmBlogBundle:Page:index.html.twig', array (
-				'blogs' => $blogs 
-		) );
+		$posts_per_page = $this->container
+		                  ->getParameter('drm_blog.max_posts_on_homepage');
+
+		$last_page = ceil($total_posts / $posts_per_page);
+		$previous_page = $page > 1 ? $page - 1 : 1;
+		$next_page = $page < $last_page ? $page + 1 : $last_page;
+		
+		$blogs = $em->getRepository('DrmBlogBundle:Blog')
+		      ->getLatestBlogs($tag, $posts_per_page, ($page - 1) * $posts_per_page);
+		
+		return $this->render ('DrmBlogBundle:Page:index.html.twig', array (
+				'blogs' => $blogs,
+		        'last_page' => $last_page,
+		        'previous_page' => $previous_page,
+		        'current_page' => $page,
+		        'next_page' => $next_page,
+		        'total_posts' => $total_posts
+		));
 	}
 
 	/**
@@ -55,7 +77,7 @@ class PageController extends Controller
 	 */
 	public function aboutAction()
 	{
-		return $this->render ( 'DrmBlogBundle:Page:about.html.twig' );
+		return $this->render('DrmBlogBundle:Page:about.html.twig');
 	}
 
 	/**
@@ -66,16 +88,16 @@ class PageController extends Controller
 	 */
 	public function contactAction()
 	{
-		$enquiry = new Enquiry ();
-		$form = $this->createForm ( new EnquiryType (), $enquiry );
+		$enquiry = new Enquiry();
+		$form = $this->createForm(new EnquiryType(), $enquiry);
 		
-		$request = $this->getRequest ();
+		$request = $this->getRequest();
 		
-		if ($request->getMethod () == 'POST') {
+		if ($request->getMethod() == 'POST') {
 			
-			$form->bind ( $request );
+			$form->bind ($request);
 			
-			if ($form->isValid ()) {
+			if ($form->isValid()) {
 				
 				$message = \Swift_Message::newInstance ()->setSubject ( 'Contact enquiry from symblog' )
 					->setFrom ( 'enquiries@symblog.co.uk' )

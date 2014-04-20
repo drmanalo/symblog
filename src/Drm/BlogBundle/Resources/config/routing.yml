@@ -1,16 +1,23 @@
 DrmBlogBundle_blog:
-        resource: "@DrmBlogBundle/Resources/config/routing/blog.yml"
-        prefix:   /blog
+    resource: "@DrmBlogBundle/Resources/config/routing/blog.yml"
+    prefix:   /blog
 
 DrmBlogBundle_user:
-        resource: "@DrmBlogBundle/Resources/config/routing/user.yml"
-        prefix:   /user
+    resource: "@DrmBlogBundle/Resources/config/routing/user.yml"
+    prefix:   /user
 
 DrmBlogBundle_homepage:
-    pattern:  /
-    defaults: { _controller: "DrmBlogBundle:Page:index" }
+    pattern: /
+    defaults: {_controller: "DrmBlogBundle:Page:index" }
     requirements:
         _method:  GET
+
+DrmBlogBundle_blogs:
+    pattern: /blogs/{tag}/{page}
+    defaults: {_controller: "DrmBlogBundle:Page:blogs", tag: "all", page: 1 }
+    requirements:
+        _method:  GET
+
         
 DrmBlogBundle_about:
     pattern:  /about

@@ -5,3 +5,5 @@ parameters:
     # Blogger max latest comments
     drm_blog.comments.latest_comment_limit: 10
     
+    # Number of posts on the home page
+    drm_blog.max_posts_on_homepage: 3

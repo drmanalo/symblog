@@ -27,13 +27,7 @@ class CommentControllerTest extends WebTestCase
 
     public function testAddComment ()
     {
-        $crawler = $this->client->request('GET', '/1/test-title');
-        
-        $this->assertEquals(1, 
-                $crawler->filter('h2:contains("Test Title")')
-                    ->count());
-        
-        //print_r($crawler);
+        $crawler = $this->client->request('POST', '/comment/1');
         
         $form = $crawler->selectButton('Submit')->form();
         
