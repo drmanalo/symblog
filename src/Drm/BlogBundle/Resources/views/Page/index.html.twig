@@ -6,9 +6,9 @@
 	<div class="span8">
 	{% for blog in blogs %}
         <article class="blog">
-            <div class="date">{{ blog.created|created_ago }}</div>
             <header>
-                <h2><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></h2>
+                <h2><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}
+                    <span class="label label-info pull-right">{{ blog.created|created_ago }}</span></a></h2>
             </header>
 
             <div class="snippet">
@@ -16,10 +16,9 @@
                 <p class="continue"><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">Continue reading...</a></p>
             </div>
 
-            <footer class="meta">
-			    <p>Comments: <a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug}) }}#comments">{{ blog.comments|length }}</a></p>
-			    <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created|date('h:i:A') }}</p>
-			    <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
+            <footer>
+			    <small><em>Last updated at {{ blog.updated|date('d M Y h:i:A') }}</em></small>
+			    <hr />
 			</footer>
             
         </article>
@@ -27,7 +26,7 @@
         <p>There are no blog entries for symblog</p>
     {% endfor %}
     </div>
-    <div class="span3 sidebar">
+    <div class="span3 offset1 sidebar">
 		{% block sidebar %}
 		{% render controller("DrmBlogBundle:Page:sidebar") %}
 		{% endblock %}

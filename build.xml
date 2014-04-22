@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Symblog Project" default="build">
+
+	<target name="build"
+		depends="clean,prepare,lint,phploc,pdepend,phpunit,assetic,assets,cache">
+		<zip destfile="${basedir}/build/target/symblog.zip">
+			<zipfileset dir="${basedir}/app" prefix="app">
+				<exclude name="**/DoctrineMigrations/**"/>
+				<exclude name="**/cache/**"/>
+				<exclude name="**/logs/**"/>
+				<exclude name="**/phpunit.*"/>
+			</zipfileset>	
+			<zipfileset dir="${basedir}/bin" prefix="bin" />
+			<zipfileset dir="${basedir}/src" prefix="src">
+				<exclude name="**/Tests/**"/>
+				<exclude name="**/DataFixtures/**"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/vendor" prefix="vendor" />
+			<zipfileset dir="${basedir}/web" prefix="web" />
+		</zip>
+		<echo message="Finished build!" />
+	</target>
+
+	<target name="clean" description="Cleanup build artifacts">
+		<delete dir="${basedir}/build/coverage" />
+		<delete dir="${basedir}/build/logs" />
+		<delete dir="${basedir}/build/pdepend" />
+		<delete dir="${basedir}/build/target" />
+		<echo message="Artifacts deleted." />
+	</target>
+
+	<target name="prepare" depends="clean" description="Prepare for build">
+		<mkdir dir="${basedir}/build/coverage" />
+		<mkdir dir="${basedir}/build/logs" />
+		<mkdir dir="${basedir}/build/pdepend" />
+		<mkdir dir="${basedir}/build/target" />
+		<echo message="Artifacts prepared." />
+	</target>
+
+	<target name="lint" description="Perform syntax check of sourcecode files">
+		<apply executable="php" failonerror="true">
+			<arg value="-l" />
+			<fileset dir="${basedir}/src">
+				<include name="**/*.php" />
+				<modified />
+			</fileset>
+			<fileset dir="${basedir}/src/Drm/BlogBundle/Tests">
+				<include name="**/*.php" />
+				<modified />
+			</fileset>
+		</apply>
+		<echo message="Syntax checked using lint." />
+	</target>
+
+	<target name="phploc" description="Measure project size using PHPLOC">
+		<exec executable="phploc">
+			<arg value="--count-tests" />
+			<arg value="--log-csv" />
+			<arg value="${basedir}/build/logs/phploc.csv" />
+			<arg path="${basedir}/src" />
+		</exec>
+		<echo message="Project measured using PHPLOC." />
+	</target>
+
+	<target name="pdepend" description="Calculate software metrics using PHP_Depend">
+		<exec executable="pdepend">
+			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+			<arg
+				value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+			<arg path="${basedir}/src" />
+		</exec>
+		<echo message="Software metrics calculated using PHP-DEPEND." />
+	</target>
+
+	<target name="phpunit" description="Run unit tests with code coverage">
+		<exec executable="phpunit" failonerror="true">
+			<arg value="-c" />
+			<arg value="app/" />
+			<arg value="--coverage-html=${basedir}/build/coverage/" />
+		</exec>
+	</target>
+
+	<target name="assetic" description="Dump assets">
+		<exec executable="${basedir}/app/console">
+			<arg value="--env=prod" />
+			<arg value="assetic:dump" />
+		</exec>
+	</target>
+
+	<target name="assets" description="Install assets">
+		<exec executable="${basedir}/app/console">
+			<arg value="assets:install" />
+			<arg value="--symlink" />
+			<arg value="${basedir}/web" />
+		</exec>
+		<echo message="Assets installed using symlink." />
+	</target>
+
+	<target name="cache" description="Cleanup cache">
+		<exec executable="${basedir}/app/console">
+			<arg value="cache:clear" />
+			<arg value="--env=prod" />
+		</exec>
+		<echo message="Production cache cleared." />
+	</target>
+
+</project> 
+   

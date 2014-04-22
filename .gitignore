@@ -6,10 +6,15 @@ vendor/*
 bin/*
 */logs/*
 */cache/*
+cache.properties
 web/data/*
 web/uploads/*
 web/bundles/*
 web/coverage/*
+
+# Ant build artifacts
+.ant-targets-build.xml
+build/*
 
 # Entity backups
 *.php~
