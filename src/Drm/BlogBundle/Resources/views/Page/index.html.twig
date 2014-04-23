@@ -7,8 +7,7 @@
 	{% for blog in blogs %}
         <article class="blog">
             <header>
-                <h2><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}
-                    <span class="label label-info pull-right">{{ blog.created|created_ago }}</span></a></h2>
+                <h2><a href="{{ path('DrmBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></h2>
             </header>
 
             <div class="snippet">
@@ -17,7 +16,7 @@
             </div>
 
             <footer>
-			    <small><em>Last updated at {{ blog.updated|date('d M Y h:i:A') }}</em></small>
+			    <small><em>Last updated at {{ blog.updated|date('d M Y') }}</em></small>
 			    <hr />
 			</footer>
             
