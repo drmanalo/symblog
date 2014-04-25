@@ -79,6 +79,14 @@ class PageController extends Controller
 	{
 		return $this->render('DrmBlogBundle:Page:about.html.twig');
 	}
+	
+	/**
+	 * display disclaimer page
+	 */
+	public function disclaimerAction()
+	{
+	    return $this->render('DrmBlogBundle:Page:disclaimer.html.twig');
+	}
 
 	/**
 	 * display contact page

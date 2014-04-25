@@ -20,8 +20,14 @@ DrmBlogBundle_blogs:
 
         
 DrmBlogBundle_about:
-    pattern:  /about
+    pattern:  /whoami
     defaults: { _controller: "DrmBlogBundle:Page:about" }
+    requirements:
+        _method:  GET
+
+DrmBlogBundle_disclaimer:
+    pattern:  /disclaimer
+    defaults: { _controller: "DrmBlogBundle:Page:disclaimer" }
     requirements:
         _method:  GET
         
