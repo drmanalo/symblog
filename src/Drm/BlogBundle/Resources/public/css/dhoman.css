@@ -7,8 +7,8 @@ body {
 	background: none repeat scroll 0 0 #FFFFFF;
 	color: #333333;
 	line-height: 1.4em;
-	font-family: 'Source Sans Pro','sans-serif';
-	font-size: 0.96em;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
 }
 
 a {
@@ -31,7 +31,7 @@ pre {
 	background: none repeat scroll 0 0 #EEEEEE;
 	border: 1px solid #DDDDDD;
 	clear: both;
-	font: 0.85em 'Source Code Pro', sans-serif;
+	font: 0.85em 'Consolas', sans-serif;
 	margin-bottom: 1.833em;
 	overflow: auto;
 	padding: 0.667em 0.917em;
