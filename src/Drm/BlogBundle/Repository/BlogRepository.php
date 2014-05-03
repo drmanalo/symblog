@@ -19,6 +19,11 @@ class BlogRepository extends EntityRepository
 			->select ('b, c')
 			->leftJoin ('b.comments', 'c')
 			->addOrderBy ('b.created', 'DESC');
+
+		if($tag != 'all') {
+		    $qb->andWhere('b.tags like :tag')
+		    ->setParameter('tag', '%'.$tag.'%');
+		}
 		
 		if ($limit) {
 			$qb->setMaxResults($limit);
@@ -26,11 +31,6 @@ class BlogRepository extends EntityRepository
 		
 		if($offset)	{
 		    $qb->setFirstResult($offset);
-		}
-		
-		if($tag != 'all') {
-		    $qb->andWhere('b.tags = :tag')
-		       ->setParameter('tags', $tag);
 		}
 		
 		return $qb->getQuery()->getResult();
@@ -42,8 +42,8 @@ class BlogRepository extends EntityRepository
 	       ->select('count(b.id)');    
 
 	   if($tag != 'all') {
-	       $qb->andWhere('b.tags = :tag')
-	       ->setParameter('tags', $tag);
+	       $qb->andWhere('b.tags like :tag')
+	       ->setParameter('tag', '%'.$tag.'%');
 	   }
 	   
 	   $query = $qb->getQuery();
